@@ -1,0 +1,28 @@
+<p>Welcome, <%= @current_user.email %>!</p>
+<p class="alert alert-success"><%= notice %></p>
+
+<h1 class="display-4">Movies</h1>
+
+<div class="container">
+  <div class="row">
+    <% @movies.each do |movie| %>
+      <div class="col-md-4 mb-4">
+        <div class="card">
+          <div class="card-body">
+            <%= render movie %>
+            <p class="card-text">
+              <%= link_to "Show this movie", movie, class: "btn btn-primary" %>
+              <% @movie = movie %>
+              <%= link_to "Create Review", new_movie_review_path(@movie), class: "btn btn-secondary" %>
+            </p>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<%= link_to "New movie", new_movie_path, class: "btn btn-success" %>
+<%= link_to "Export Movie CSV", export_csv_movie_movies_path(format: :csv), class: "btn btn-secondary" %>
+<%= link_to "Export Review CSV", export_csv_review_movies_path(format: :csv), class: "btn btn-secondary" %>
+
